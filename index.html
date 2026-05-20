@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -742,6 +743,38 @@
 
     footer .logo-foot { font-weight: 800; color: var(--red); font-size: 1rem; }
 
+    /* ── OPORTUN MAP ── */
+    .map-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--red);
+      margin: 1.5rem 0 0.6rem;
+    }
+
+    #oportun-map {
+      width: 100%;
+      height: 320px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      z-index: 1;
+    }
+
+    .map-pin-label {
+      background: #fff;
+      border: 2px solid var(--red, #FF385C);
+      border-radius: 8px;
+      padding: 4px 10px;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: #222;
+      white-space: nowrap;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    }
+
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
@@ -941,6 +974,8 @@
         <li><strong>Maintained IT operations across 16 active Texas locations</strong> — proactively monitoring and resolving issues with internet connectivity, workstations, and peripheral equipment to minimize downtime across the store network.</li>
         <li><strong>Served as the sole IT point of contact</strong> for store managers and staff, providing hands-on troubleshooting and remote support across all hardware, network, and software systems in the field.</li>
       </ul>
+      <div class="map-label">16 Managed Locations across Texas</div>
+      <div id="oportun-map"></div>
     </div>
   </div>
 </section>
@@ -1134,6 +1169,66 @@
       a.style.color = active ? 'var(--text)' : '';
     });
   }, { passive: true });
+</script>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+  const map = L.map('oportun-map', { zoomControl: true, scrollWheelZoom: false })
+    .setView([29.8, -97.5], 6);
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 19
+  }).addTo(map);
+
+  const redIcon = L.divIcon({
+    className: '',
+    html: `<div style="
+      width:14px;height:14px;
+      background:#FF385C;
+      border:2.5px solid #fff;
+      border-radius:50%;
+      box-shadow:0 0 0 2px #FF385C, 0 2px 6px rgba(0,0,0,0.25);
+    "></div>`,
+    iconSize: [14, 14],
+    iconAnchor: [7, 7]
+  });
+
+  const locations = [
+    // Houston (5 locations)
+    { lat: 29.7604, lng: -95.3698, label: 'Houston – Downtown' },
+    { lat: 29.7200, lng: -95.4100, label: 'Houston – SW' },
+    { lat: 29.7900, lng: -95.3300, label: 'Houston – NE' },
+    { lat: 29.6800, lng: -95.5100, label: 'Houston – Stafford' },
+    { lat: 29.7500, lng: -95.4700, label: 'Houston – Westside' },
+    // Dallas (3 locations)
+    { lat: 32.7767, lng: -96.7970, label: 'Dallas – Downtown' },
+    { lat: 32.8200, lng: -96.8500, label: 'Dallas – North' },
+    { lat: 32.7300, lng: -96.8700, label: 'Dallas – Oak Cliff' },
+    // Fort Worth (2 locations)
+    { lat: 32.7555, lng: -97.3308, label: 'Fort Worth – Downtown' },
+    { lat: 32.7000, lng: -97.3800, label: 'Fort Worth – South' },
+    // San Antonio (3 locations)
+    { lat: 29.4241, lng: -98.4936, label: 'San Antonio – Downtown' },
+    { lat: 29.4600, lng: -98.5400, label: 'San Antonio – NW' },
+    { lat: 29.3800, lng: -98.5200, label: 'San Antonio – South' },
+    // Brownsville (2 locations)
+    { lat: 25.9017, lng: -97.4975, label: 'Brownsville – Main' },
+    { lat: 25.9300, lng: -97.4700, label: 'Brownsville – East' },
+    // Laredo (1 location)
+    { lat: 27.5306, lng: -99.4803, label: 'Laredo' },
+  ];
+
+  locations.forEach(loc => {
+    L.marker([loc.lat, loc.lng], { icon: redIcon })
+      .addTo(map)
+      .bindTooltip(`<div class="map-pin-label">${loc.label}</div>`, {
+        permanent: false,
+        direction: 'top',
+        offset: [0, -10],
+        opacity: 1
+      });
+  });
 </script>
 
 </body>
