@@ -124,11 +124,10 @@
     }
 
     .hero-inner {
-      max-width: 1200px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 5rem;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
       align-items: center;
     }
 
@@ -268,12 +267,14 @@
     /* RIGHT — photo circle */
     .hero-photo-wrap {
       position: relative;
-      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .hero-circle {
-      width: clamp(300px, 28vw, 420px);
-      height: clamp(300px, 28vw, 420px);
+      width: clamp(340px, 38vw, 500px);
+      height: clamp(340px, 38vw, 500px);
       border-radius: 50%;
       overflow: hidden;
       border: 5px solid var(--red-bg);
