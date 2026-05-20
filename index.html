@@ -6,29 +6,36 @@
   <title>Alfred Albizures — Technical Analyst & Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --green:     #39FF14;
-      --green-dim: #2ecc10;
-      --bg:        #1a1d2e;
-      --bg-2:      #20243a;
-      --bg-3:      #252942;
-      --text:      #ffffff;
-      --text-2:    #b0b3c6;
-      --border:    rgba(255,255,255,0.08);
+      --red:       #FF385C;
+      --red-dark:  #E00B41;
+      --red-light: #FF5A5F;
+      --red-bg:    #FFF0F1;
+      --text:      #222222;
+      --text-2:    #484848;
+      --text-3:    #717171;
+      --border:    #DDDDDD;
+      --bg:        #FFFFFF;
+      --bg-2:      #F7F7F7;
+      --bg-3:      #EBEBEB;
       --radius:    12px;
       --nav-h:     80px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.08), 0 4px 12px rgba(0,0,0,0.05);
+      --shadow-md: 0 2px 4px rgba(0,0,0,0.04), 0 8px 24px rgba(0,0,0,0.1);
+      --shadow-lg: 0 4px 8px rgba(0,0,0,0.04), 0 16px 48px rgba(0,0,0,0.12);
     }
 
     html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg);
       color: var(--text);
+      line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
@@ -42,42 +49,24 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 clamp(1.5rem, 5vw, 5rem);
-      background: rgba(26, 29, 46, 0.95);
+      background: rgba(255,255,255,0.96);
       backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
       z-index: 100;
     }
 
     .nav-logo {
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
+      font-weight: 800;
+      font-size: 1.25rem;
+      color: var(--red);
       text-decoration: none;
-    }
-
-    .nav-logo-icon {
-      width: 38px; height: 38px;
-      background: var(--green);
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 1.1rem;
-      color: var(--bg);
-    }
-
-    .nav-logo-text {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text);
-      letter-spacing: -0.02em;
+      letter-spacing: -0.03em;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 2.25rem;
+      gap: 2rem;
       list-style: none;
     }
 
@@ -86,286 +75,289 @@
       text-decoration: none;
       font-size: 0.875rem;
       font-weight: 500;
-      transition: color 0.2s;
+      transition: color 0.15s;
+      position: relative;
     }
 
-    .nav-links a:hover,
-    .nav-links a.active { color: var(--green); }
-
-    .nav-cv {
-      border: 2px solid var(--text);
-      color: var(--text) !important;
-      padding: 0.5rem 1.25rem;
-      border-radius: 6px;
-      font-weight: 700 !important;
-      font-size: 0.78rem !important;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      transition: all 0.2s !important;
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0; right: 0;
+      height: 2px;
+      background: var(--text);
+      transform: scaleX(0);
+      transition: transform 0.2s;
     }
 
-    .nav-cv:hover {
-      border-color: var(--green) !important;
-      color: var(--green) !important;
+    .nav-links a:hover { color: var(--text); }
+    .nav-links a:hover::after { transform: scaleX(1); }
+
+    .nav-cta {
+      background: var(--red) !important;
+      color: #fff !important;
+      padding: 0.55rem 1.25rem;
+      border-radius: 8px;
+      font-weight: 600;
     }
+
+    .nav-cta::after { display: none !important; }
+    .nav-cta:hover { background: var(--red-dark) !important; }
 
     /* ── HERO ── */
     #hero {
       min-height: 100vh;
       display: flex;
       align-items: center;
-      padding: 0 clamp(2rem, 8vw, 8rem);
+      padding: calc(var(--nav-h) + 3rem) clamp(1.5rem, 8vw, 8rem) 5rem;
+      background: var(--bg);
       position: relative;
       overflow: hidden;
     }
 
-    /* Background decorative shapes */
-    .deco {
+    #hero::before {
+      content: '';
       position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(255,56,92,0.05) 0%, transparent 65%);
       pointer-events: none;
-      color: var(--text-2);
-      opacity: 0.5;
-    }
-
-    .deco-plus {
-      top: 18%;
-      right: 3%;
-      font-size: 2rem;
-      font-weight: 100;
-      opacity: 0.4;
-    }
-
-    .deco-wave {
-      bottom: 20%;
-      right: 5%;
-      opacity: 0.3;
-    }
-
-    .deco-squiggle {
-      top: 22%;
-      left: 47%;
-      opacity: 0.25;
     }
 
     .hero-inner {
+      max-width: 1200px;
       width: 100%;
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr auto;
+      gap: 5rem;
       align-items: center;
-      gap: 2rem;
-      padding-top: var(--nav-h);
     }
 
     /* LEFT */
-    .hero-left { padding-right: 2rem; }
-
-    .hero-eyebrow {
-      font-size: 0.85rem;
-      font-weight: 600;
-      letter-spacing: 0.2em;
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--red-bg);
+      color: var(--red);
+      padding: 0.4rem 1rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      letter-spacing: 0.04em;
       text-transform: uppercase;
-      color: var(--green);
-      margin-bottom: 1rem;
+    }
+
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--red);
+      border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
     }
 
     h1 {
-      font-size: clamp(3rem, 7vw, 6rem);
-      font-weight: 900;
-      line-height: 1.0;
-      letter-spacing: -0.03em;
+      font-size: clamp(2.6rem, 5.5vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.04em;
       color: var(--text);
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
-    .hero-typing {
-      font-size: clamp(1rem, 2vw, 1.3rem);
-      font-weight: 500;
-      color: var(--text-2);
+    h1 em {
+      font-style: normal;
+      color: var(--red);
+    }
+
+    .hero-sub {
+      font-size: clamp(1rem, 1.8vw, 1.15rem);
+      color: var(--text-3);
+      max-width: 520px;
       margin-bottom: 2.5rem;
-      min-height: 2rem;
+      line-height: 1.75;
+      font-weight: 400;
     }
 
-    .hero-typing .typed-word {
-      color: var(--green);
-      font-weight: 700;
+    .hero-actions {
+      display: flex;
+      gap: 0.875rem;
+      flex-wrap: wrap;
+      margin-bottom: 3.5rem;
     }
 
-    .cursor {
-      display: inline-block;
-      width: 3px;
-      height: 1.1em;
-      background: var(--green);
-      margin-left: 2px;
-      vertical-align: middle;
-      animation: blink-cursor 0.8s step-end infinite;
-    }
-
-    @keyframes blink-cursor {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0; }
-    }
-
-    .hero-btn {
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 0.6rem;
-      background: var(--green);
-      color: var(--bg);
-      padding: 1rem 2.25rem;
-      border-radius: 6px;
-      font-size: 0.82rem;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
+      gap: 0.5rem;
+      padding: 0.8rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
       text-decoration: none;
-      transition: background 0.2s, transform 0.2s;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+      font-family: inherit;
     }
 
-    .hero-btn:hover {
-      background: var(--green-dim);
-      transform: translateY(-2px);
+    .btn-primary {
+      background: var(--red);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(255,56,92,0.3);
     }
 
-    /* RIGHT — photo in circle */
-    .hero-right {
+    .btn-primary:hover {
+      background: var(--red-dark);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(255,56,92,0.35);
+    }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1.5px solid var(--border);
+    }
+
+    .btn-outline:hover {
+      border-color: var(--text);
+      transform: translateY(-1px);
+    }
+
+    .hero-stats {
       display: flex;
-      justify-content: center;
-      align-items: center;
-      position: relative;
-    }
-
-    .circle-bg {
-      width: clamp(340px, 42vw, 520px);
-      height: clamp(340px, 42vw, 520px);
-      background: var(--bg-3);
-      border-radius: 50%;
-      position: relative;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       overflow: hidden;
+      width: fit-content;
     }
 
-    .circle-bg img {
+    .stat {
+      padding: 1rem 1.75rem;
+      border-right: 1px solid var(--border);
+    }
+
+    .stat:last-child { border-right: none; }
+
+    .stat-num {
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-num em { font-style: normal; color: var(--red); }
+
+    .stat-label {
+      display: block;
+      font-size: 0.72rem;
+      color: var(--text-3);
+      margin-top: 0.25rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    /* RIGHT — photo circle */
+    .hero-photo-wrap {
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .hero-circle {
+      width: clamp(300px, 28vw, 420px);
+      height: clamp(300px, 28vw, 420px);
+      border-radius: 50%;
+      overflow: hidden;
+      border: 5px solid var(--red-bg);
+      box-shadow: 0 0 0 3px var(--red), var(--shadow-lg);
+      position: relative;
+    }
+
+    .hero-circle img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center top;
-      border-radius: 50%;
       display: block;
     }
 
-    /* Placeholder shown when photo.jpg doesn't exist */
-    .circle-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 0.75rem;
-      color: var(--text-2);
-      font-size: 0.85rem;
-      text-align: center;
-      padding: 2rem;
-    }
-
-    .circle-placeholder svg { width: 72px; height: 72px; opacity: 0.3; }
-
-    /* Green ring around circle */
-    .circle-ring {
-      position: absolute;
-      inset: -8px;
-      border-radius: 50%;
-      border: 3px solid rgba(57,255,20,0.25);
-      pointer-events: none;
-    }
-
     /* Floating badge on the circle */
-    .circle-badge {
+    .hero-photo-badge {
       position: absolute;
-      bottom: 2rem;
-      left: -1rem;
-      background: var(--bg-2);
+      bottom: 1.5rem;
+      left: -1.5rem;
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 0.75rem 1.25rem;
+      padding: 0.7rem 1.1rem;
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      gap: 0.65rem;
+      box-shadow: var(--shadow-md);
+      white-space: nowrap;
     }
 
     .badge-dot {
-      width: 10px; height: 10px;
-      background: var(--green);
+      width: 9px; height: 9px;
+      background: #22c55e;
       border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
       flex-shrink: 0;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
       animation: pulse-dot 2s ease-in-out infinite;
     }
 
     @keyframes pulse-dot {
-      0%, 100% { box-shadow: 0 0 8px var(--green); }
-      50% { box-shadow: 0 0 18px var(--green); }
+      0%, 100% { box-shadow: 0 0 0 3px rgba(34,197,94,0.2); }
+      50% { box-shadow: 0 0 0 6px rgba(34,197,94,0.1); }
     }
 
-    .badge-text { font-size: 0.78rem; font-weight: 600; line-height: 1.3; }
-    .badge-text small { color: var(--text-2); font-weight: 400; display: block; font-size: 0.7rem; }
+    .badge-text { font-size: 0.76rem; font-weight: 700; line-height: 1.3; color: var(--text); }
+    .badge-text small { color: var(--text-3); font-weight: 400; display: block; font-size: 0.68rem; }
 
-    /* Social row */
-    .hero-socials {
-      display: flex;
-      gap: 1rem;
-      margin-top: 2rem;
+    /* ── DIVIDER ── */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0 clamp(1.5rem, 8vw, 8rem);
     }
 
-    .social-link {
-      width: 40px; height: 40px;
-      border: 1.5px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--text-2);
-      text-decoration: none;
-      transition: all 0.2s;
-    }
+    /* ── SECTIONS ── */
+    section:not(#hero) { padding: 6rem clamp(1.5rem, 8vw, 8rem); }
 
-    .social-link:hover {
-      border-color: var(--green);
-      color: var(--green);
-    }
-
-    .social-link svg { width: 16px; height: 16px; }
-
-    /* ── SHARED SECTION STYLES ── */
-    section:not(#hero) { padding: 6rem clamp(2rem, 8vw, 8rem); }
-
-    .section-tag {
-      display: inline-block;
-      font-size: 0.72rem;
+    .section-eyebrow {
+      font-size: 0.75rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--green);
+      letter-spacing: 0.1em;
+      color: var(--red);
       margin-bottom: 0.6rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
     }
 
     h2 {
-      font-size: clamp(1.8rem, 3.5vw, 2.75rem);
+      font-size: clamp(1.75rem, 3.5vw, 2.5rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
+      letter-spacing: -0.035em;
       color: var(--text);
       margin-bottom: 0.75rem;
     }
 
-    .sub {
-      color: var(--text-2);
-      font-size: 0.95rem;
-      line-height: 1.8;
-      max-width: 520px;
+    .section-intro {
+      font-size: 1rem;
+      color: var(--text-3);
+      max-width: 500px;
       margin-bottom: 3rem;
+      line-height: 1.75;
     }
 
     /* ── ABOUT ── */
@@ -373,22 +365,17 @@
 
     .about-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 380px 1fr;
       gap: 5rem;
-      align-items: center;
+      align-items: start;
     }
 
     .about-photo {
       width: 100%;
-      aspect-ratio: 1;
-      max-width: 420px;
-      border-radius: 50%;
-      overflow: hidden;
+      aspect-ratio: 3/4;
       background: var(--bg-3);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 4px solid rgba(57,255,20,0.2);
+      border-radius: 20px;
+      overflow: hidden;
       position: relative;
     }
 
@@ -397,116 +384,110 @@
       height: 100%;
       object-fit: cover;
       object-position: center top;
+      display: block;
     }
 
-    .about-photo-placeholder {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.75rem;
-      color: var(--text-2);
-      font-size: 0.85rem;
-    }
+    .about-content { padding-top: 0.5rem; }
 
-    .about-photo-placeholder svg { width: 64px; height: 64px; opacity: 0.3; }
-
-    .about-text p {
+    .about-content p {
       color: var(--text-2);
-      font-size: 0.95rem;
-      line-height: 1.85;
       margin-bottom: 1.25rem;
+      line-height: 1.8;
+      font-size: 0.975rem;
     }
 
-    .about-text strong { color: var(--text); }
+    .about-content strong { color: var(--text); font-weight: 700; }
 
-    .info-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin: 1.75rem 0;
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1.75rem;
     }
-
-    .info-item { font-size: 0.85rem; }
-    .info-item span { color: var(--text-2); }
-    .info-item strong { color: var(--text); }
-
-    .pill-row { display: flex; flex-wrap: wrap; gap: 0.5rem; }
 
     .pill {
+      background: var(--bg);
       border: 1.5px solid var(--border);
       color: var(--text-2);
-      padding: 0.35rem 1rem;
+      padding: 0.4rem 1rem;
       border-radius: 99px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      transition: all 0.2s;
     }
-
-    .pill:hover { border-color: var(--green); color: var(--green); }
 
     /* ── EXPERIENCE ── */
     #experience { background: var(--bg); }
 
-    .exp-grid { display: flex; flex-direction: column; gap: 1.25rem; }
+    .exp-list { display: flex; flex-direction: column; gap: 1.5rem; }
 
     .exp-card {
-      background: var(--bg-2);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2rem 2.25rem;
-      border-left: 4px solid var(--green);
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
 
-    .exp-card:hover { transform: translateX(6px); }
+    .exp-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
 
-    .exp-top {
+    .exp-header {
       display: flex;
       justify-content: space-between;
       align-items: flex-start;
       flex-wrap: wrap;
       gap: 0.75rem;
-      margin-bottom: 0.3rem;
+      margin-bottom: 0.25rem;
     }
 
-    .exp-title { font-size: 1.05rem; font-weight: 700; color: var(--text); }
+    .exp-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
 
     .exp-date {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--green);
-      background: rgba(57,255,20,0.1);
+      display: inline-flex;
+      align-items: center;
+      font-size: 0.8rem;
+      color: var(--text-3);
+      background: var(--bg-2);
       padding: 0.3rem 0.85rem;
       border-radius: 99px;
+      font-weight: 500;
       white-space: nowrap;
+      border: 1px solid var(--border);
     }
 
     .exp-company {
       font-size: 0.875rem;
-      color: var(--green);
       font-weight: 600;
-      margin-bottom: 1rem;
+      color: var(--red);
+      margin-bottom: 1.1rem;
     }
 
-    .exp-company span { color: var(--text-2); font-weight: 400; }
+    .exp-company span { color: var(--text-3); font-weight: 400; }
 
-    .exp-list { list-style: none; display: flex; flex-direction: column; gap: 0.55rem; }
+    .exp-bullets { list-style: none; display: flex; flex-direction: column; gap: 0.6rem; }
 
-    .exp-list li {
-      font-size: 0.875rem;
+    .exp-bullets li {
       color: var(--text-2);
-      padding-left: 1.2rem;
-      position: relative;
+      font-size: 0.9rem;
       line-height: 1.7;
+      padding-left: 1.25rem;
+      position: relative;
     }
 
-    .exp-list li::before {
+    .exp-bullets li::before {
       content: '';
       position: absolute;
-      left: 0; top: 0.6em;
+      left: 0;
+      top: 0.6em;
       width: 5px; height: 5px;
-      background: var(--green);
       border-radius: 50%;
+      background: var(--red);
     }
 
     /* ── SKILLS ── */
@@ -514,68 +495,80 @@
 
     .skills-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
       gap: 1.25rem;
     }
 
     .skill-card {
-      background: var(--bg-3);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.5rem 1.75rem;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
 
-    .skill-card:hover { border-color: rgba(57,255,20,0.4); transform: translateY(-3px); }
+    .skill-card:hover {
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
 
-    .skill-icon { font-size: 1.5rem; display: block; margin-bottom: 0.875rem; }
+    .skill-icon {
+      font-size: 1.5rem;
+      margin-bottom: 0.875rem;
+      display: block;
+    }
 
     .skill-card h3 {
-      font-size: 0.88rem;
+      font-size: 0.9rem;
       font-weight: 700;
       color: var(--text);
       margin-bottom: 0.875rem;
     }
 
-    .tag-row { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 0.45rem; }
 
     .stag {
-      background: rgba(255,255,255,0.06);
+      background: var(--bg-2);
       color: var(--text-2);
-      padding: 0.25rem 0.65rem;
-      border-radius: 5px;
-      font-size: 0.75rem;
+      padding: 0.28rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.76rem;
       font-weight: 600;
       border: 1px solid var(--border);
     }
 
     .stag.hot {
-      background: rgba(57,255,20,0.1);
-      color: var(--green);
-      border-color: rgba(57,255,20,0.25);
+      background: var(--red-bg);
+      color: var(--red);
+      border-color: rgba(255,56,92,0.2);
     }
 
     /* ── EDUCATION ── */
     #education { background: var(--bg); }
 
-    .edu-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
 
     .edu-card {
-      background: var(--bg-2);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2rem;
       display: flex;
       gap: 1.25rem;
-      transition: border-color 0.2s;
+      align-items: flex-start;
+      transition: box-shadow 0.2s;
     }
 
-    .edu-card:hover { border-color: rgba(57,255,20,0.35); }
+    .edu-card:hover { box-shadow: var(--shadow-sm); }
 
-    .edu-icon {
+    .edu-icon-wrap {
       width: 52px; height: 52px;
-      background: rgba(57,255,20,0.12);
       border-radius: 12px;
+      background: var(--red-bg);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -583,28 +576,42 @@
       flex-shrink: 0;
     }
 
-    .edu-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 0.2rem; }
-    .edu-school { font-size: 0.875rem; color: var(--green); font-weight: 600; margin-bottom: 0.15rem; }
-    .edu-year { font-size: 0.8rem; color: var(--text-2); }
+    .edu-card h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.2rem;
+    }
+
+    .edu-school {
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--red);
+      margin-bottom: 0.15rem;
+    }
+
+    .edu-year { font-size: 0.8rem; color: var(--text-3); }
 
     /* ── HACKATHON ── */
     #highlights { background: var(--bg-2); }
 
     .hackathon-card {
-      background: var(--bg-3);
-      border: 1px solid rgba(57,255,20,0.2);
+      background: var(--bg);
+      border: 1px solid var(--border);
       border-radius: 20px;
       padding: 2.5rem;
-      display: flex;
+      display: grid;
+      grid-template-columns: auto 1fr;
       gap: 2rem;
-      align-items: flex-start;
-      max-width: 860px;
+      align-items: center;
+      max-width: 820px;
+      box-shadow: var(--shadow-sm);
     }
 
     .hackathon-icon {
       width: 80px; height: 80px;
-      background: linear-gradient(135deg, #FFE566, #FF6B6B);
-      border-radius: 18px;
+      background: linear-gradient(135deg, #FFE66D, #FF6B6B);
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -612,7 +619,12 @@
       flex-shrink: 0;
     }
 
-    .hackathon-card h3 { font-size: 1.2rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .hackathon-card h3 {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
 
     .hackathon-card p {
       font-size: 0.9rem;
@@ -624,9 +636,12 @@
     .badge-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }
 
     .award-badge {
-      background: rgba(255, 229, 102, 0.12);
-      border: 1px solid rgba(255,229,102,0.3);
-      color: #FFE566;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      background: #FFF9E6;
+      border: 1px solid #F5D66B;
+      color: #8A6500;
       padding: 0.35rem 0.875rem;
       border-radius: 99px;
       font-size: 0.78rem;
@@ -643,25 +658,40 @@
     }
 
     .interest-card {
-      background: var(--bg-2);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 2rem;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
     }
 
-    .interest-card:hover { border-color: rgba(57,255,20,0.35); transform: translateY(-4px); }
+    .interest-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
 
-    .interest-emoji { font-size: 2.2rem; display: block; margin-bottom: 1rem; }
-    .interest-card h3 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.5rem; }
-    .interest-card p { font-size: 0.85rem; color: var(--text-2); line-height: 1.65; }
+    .interest-emoji { font-size: 2rem; display: block; margin-bottom: 1rem; }
+
+    .interest-card h3 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+    }
+
+    .interest-card p { font-size: 0.86rem; color: var(--text-3); line-height: 1.65; }
 
     /* ── CONTACT ── */
-    #contact { background: var(--bg-2); text-align: center; }
+    #contact { background: var(--bg-2); }
 
-    .contact-inner { max-width: 700px; margin: 0 auto; }
-    .contact-inner .section-tag { display: block; }
-    .contact-inner .sub { margin-left: auto; margin-right: auto; }
+    .contact-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-inner .section-eyebrow { justify-content: center; }
+    .contact-inner .section-intro { margin-left: auto; margin-right: auto; }
 
     .contact-grid {
       display: grid;
@@ -671,69 +701,77 @@
     }
 
     .contact-item {
-      background: var(--bg-3);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 1.75rem 1.25rem;
+      padding: 1.5rem 1.25rem;
       text-decoration: none;
       color: var(--text);
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 0.6rem;
-      transition: border-color 0.2s, transform 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s;
+      font-weight: 500;
     }
 
-    .contact-item:hover { border-color: rgba(57,255,20,0.4); transform: translateY(-3px); color: var(--green); }
+    .contact-item:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+      color: var(--red);
+    }
 
-    .contact-item svg { width: 22px; height: 22px; color: var(--green); }
+    .contact-item svg { width: 22px; height: 22px; color: var(--red); }
+    .contact-item span { font-size: 0.82rem; color: var(--text-3); word-break: break-all; }
     .contact-item strong { font-size: 0.88rem; font-weight: 700; }
-    .contact-item span { font-size: 0.78rem; color: var(--text-2); word-break: break-all; }
 
     /* ── FOOTER ── */
     footer {
       background: var(--bg);
       border-top: 1px solid var(--border);
-      padding: 1.75rem clamp(2rem, 8vw, 8rem);
+      padding: 1.75rem clamp(1.5rem, 8vw, 8rem);
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 0.82rem;
-      color: var(--text-2);
+      color: var(--text-3);
       flex-wrap: wrap;
       gap: 0.5rem;
     }
 
-    .footer-logo { font-weight: 800; color: var(--green); font-size: 1rem; }
+    footer .logo-foot { font-weight: 800; color: var(--red); font-size: 1rem; }
 
-    /* ── REVEAL ── */
+    /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
-      transform: translateY(22px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transform: translateY(20px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
     }
 
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
     /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .hero-photo-wrap { display: flex; justify-content: center; order: -1; }
+      .hero-circle { width: 260px; height: 260px; }
+      .hero-photo-badge { left: 50%; transform: translateX(-50%); bottom: -1rem; }
+    }
+
     @media (max-width: 900px) {
-      .hero-inner { grid-template-columns: 1fr; padding-top: calc(var(--nav-h) + 2rem); min-height: auto; }
-      .hero-right { margin-top: 3rem; }
-      .hero-left { padding-right: 0; text-align: center; }
-      .hero-socials { justify-content: center; }
       .about-grid { grid-template-columns: 1fr; }
-      .about-photo { margin: 0 auto; }
-      .edu-row { grid-template-columns: 1fr; }
+      .edu-grid { grid-template-columns: 1fr; }
       .interests-grid { grid-template-columns: 1fr 1fr; }
       .contact-grid { grid-template-columns: 1fr; }
+      .hackathon-card { grid-template-columns: 1fr; text-align: center; }
+      .hackathon-icon { margin: 0 auto; }
     }
 
     @media (max-width: 600px) {
       .nav-links { display: none; }
       .interests-grid { grid-template-columns: 1fr; }
-      h1 { font-size: 2.6rem; }
-      .hackathon-card { flex-direction: column; }
-      .hackathon-icon { margin: 0 auto; }
+      .hero-stats { border: none; flex-direction: row; flex-wrap: wrap; gap: 1.5rem; }
+      .stat { border: 1px solid var(--border); border-radius: var(--radius); padding: 0.75rem 1.25rem; }
     }
   </style>
 </head>
@@ -741,64 +779,65 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#hero" class="nav-logo">
-    <div class="nav-logo-icon">A</div>
-    <span class="nav-logo-text">Alfred</span>
-  </a>
+  <a href="#hero" class="nav-logo">alfred albizures</a>
   <ul class="nav-links">
-    <li><a href="#hero" class="active">Home</a></li>
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
-    <li><a href="#contact">Contact</a></li>
-    <li><a href="mailto:alfredalbizures@gmail.com" class="nav-cv">Download CV</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact" class="nav-cta">Contact</a></li>
   </ul>
 </nav>
 
 <!-- HERO -->
 <section id="hero">
-  <!-- Decorative elements -->
-  <span class="deco deco-plus">✕</span>
-  <svg class="deco deco-wave" width="60" height="30" viewBox="0 0 60 30" fill="none"><path d="M2 15 Q15 2 28 15 Q41 28 54 15" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/></svg>
-  <svg class="deco deco-squiggle" width="50" height="40" viewBox="0 0 50 40" fill="none"><path d="M5 35 Q12 5 20 20 Q28 35 36 15 Q44 5 48 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
-
   <div class="hero-inner">
-    <!-- LEFT -->
+
+    <!-- LEFT: text -->
     <div class="hero-left">
-      <p class="hero-eyebrow">Hello I'm</p>
-      <h1>Alfred<br>Albizures</h1>
-      <p class="hero-typing">
-        A Passionate <span class="typed-word" id="typed"></span><span class="cursor"></span>
+      <div class="hero-badge">Available for New Opportunities</div>
+      <h1>
+        Technical Analyst<br>&amp; <em>Developer</em>
+      </h1>
+      <p class="hero-sub">
+        10+ years bridging IT infrastructure and software development. I build reliable systems, ship clean interfaces, and lead technical teams — based in Houston, TX.
       </p>
-      <a href="#contact" class="hero-btn">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        Say Hello
-      </a>
-      <div class="hero-socials">
-        <a href="https://linkedin.com/in/alfred-albizures-b8401895/" target="_blank" rel="noopener" class="social-link" title="LinkedIn">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+      <div class="hero-actions">
+        <a href="#experience" class="btn btn-primary">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a1 1 0 00-1 1v3h10V4a1 1 0 00-1-1z"/></svg>
+          View My Work
         </a>
-        <a href="mailto:alfredalbizures@gmail.com" class="social-link" title="Email">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="#contact" class="btn btn-outline">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          Get In Touch
         </a>
-        <a href="tel:8324140264" class="social-link" title="Phone">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.68A2 2 0 012 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
-        </a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <span class="stat-num">10<em>+</em></span>
+          <span class="stat-label">Years Experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">300<em>+</em></span>
+          <span class="stat-label">Devices Deployed</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">4</span>
+          <span class="stat-label">Companies</span>
+        </div>
+        <div class="stat">
+          <span class="stat-num">2</span>
+          <span class="stat-label">Hackathon Awards</span>
+        </div>
       </div>
     </div>
 
-    <!-- RIGHT — photo circle -->
-    <div class="hero-right">
-      <div class="circle-bg">
-        <img src="photo.jpg" alt="Alfred Albizures"
-             onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-        <div class="circle-placeholder" style="display:none;">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-          <span>Save your photo as<br><strong>photo.jpg</strong><br>in this folder</span>
-        </div>
-        <div class="circle-ring"></div>
+    <!-- RIGHT: photo in circle -->
+    <div class="hero-photo-wrap">
+      <div class="hero-circle">
+        <img src="photo.jpg" alt="Alfred Albizures" />
       </div>
-      <div class="circle-badge">
+      <div class="hero-photo-badge">
         <div class="badge-dot"></div>
         <div class="badge-text">
           Available for Roles
@@ -806,105 +845,109 @@
         </div>
       </div>
     </div>
+
   </div>
 </section>
+
+<hr class="divider" />
 
 <!-- ABOUT -->
 <section id="about">
   <div class="about-grid">
     <div class="about-photo reveal">
-      <img src="photo.jpg" alt="Alfred Albizures"
-           onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
-      <div class="about-photo-placeholder" style="display:none;">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
-        <span>photo.jpg</span>
-      </div>
+      <img src="photo.jpg" alt="Alfred Albizures" />
     </div>
-    <div class="about-text">
-      <div class="section-tag reveal">About Me</div>
+    <div class="about-content">
+      <div class="section-eyebrow reveal">About Me</div>
       <h2 class="reveal">Solving problems,<br>one system at a time</h2>
       <p class="reveal">
-        I'm a <strong>Technical Analyst and Developer</strong> with a decade of experience across healthcare tech, fintech, and higher education. I thrive at the intersection of IT infrastructure and software — whether that's scripting deployment tools, building front-end interfaces, or leading a full device migration.
+        I'm a <strong>Technical Analyst and Developer</strong> with a decade of experience across healthcare tech, fintech, and higher education. I thrive at the intersection of IT infrastructure and software — scripting deployment tools, building front-end interfaces, and leading device migrations.
       </p>
       <p class="reveal">
-        At <strong>Castle Biosciences</strong>, I served as the primary point of contact for website deployments and developed a <strong>Mapbox route-mapping solution</strong> that streamlined sales operations across hundreds of clinic locations. I also led a Windows 11 migration across 300+ devices.
+        At <strong>Castle Biosciences</strong>, I was the primary point of contact for website deployments and built a <strong>Mapbox route-mapping tool</strong> that streamlined sales operations across hundreds of clinic locations. I also led a Windows 11 migration across 300+ devices.
       </p>
-      <div class="info-grid reveal">
-        <div class="info-item"><span>Name: </span><strong>Alfred Albizures</strong></div>
-        <div class="info-item"><span>Location: </span><strong>Houston, TX</strong></div>
-        <div class="info-item"><span>Email: </span><strong>alfredalbizures@gmail.com</strong></div>
-        <div class="info-item"><span>Language: </span><strong>Spanish (Fluent)</strong></div>
-      </div>
+      <p class="reveal">
+        Outside of tech, I see the world through a camera — focused on <strong>architectural photography</strong> and documenting human culture through travel. Currently pursuing my <strong>CompTIA Network+</strong> certification.
+      </p>
       <div class="pill-row reveal">
+        <span class="pill">Houston, TX</span>
+        <span class="pill">Spanish Fluent</span>
         <span class="pill">CompTIA A+</span>
-        <span class="pill">Network+ (In Progress)</span>
         <span class="pill">Open to Roles</span>
       </div>
     </div>
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- EXPERIENCE -->
 <section id="experience">
-  <div class="section-tag reveal">Experience</div>
+  <div class="section-eyebrow reveal">Experience</div>
   <h2 class="reveal">Where I've Worked</h2>
-  <p class="sub reveal">A decade of hands-on technical work across biotech, fintech, and higher education.</p>
+  <p class="section-intro reveal">A decade of hands-on technical work across biotech, fintech, and higher education.</p>
 
-  <div class="exp-grid">
+  <div class="exp-list">
     <div class="exp-card reveal">
-      <div class="exp-top">
+      <div class="exp-header">
         <div class="exp-title">Technical Analyst II / Programmer Analyst</div>
         <div class="exp-date">Jul 2019 – Feb 2026</div>
       </div>
       <div class="exp-company">Castle Biosciences <span>· Houston, TX</span></div>
-      <ul class="exp-list">
-        <li>Resolved Tier 1 &amp; Tier 2 helpdesk support remotely and on-site — hardware, software, and network issues — while managing new-hire onboarding.</li>
-        <li>Spearheaded Windows 11 migration and device refresh across 300+ machines with minimal disruption to end users.</li>
-        <li>Primary point of contact for all website updates and production deployments.</li>
-        <li>Developed a Mapbox route-mapping solution to help the sales team efficiently travel between clinics and physician locations.</li>
+      <ul class="exp-bullets">
+        <li>Resolved Tier 1 &amp; Tier 2 helpdesk support remotely and in person — hardware, software, and network issues — while managing new-hire onboarding for smooth day-one starts.</li>
+        <li>Spearheaded Windows 11 migration and device refresh across 300+ machines, coordinating cross-team execution with minimal disruption to end users.</li>
+        <li>Primary point of contact for all website updates and releases, ensuring accurate and timely production deployments.</li>
+        <li>Developed a Mapbox-based route-mapping solution to help the sales team efficiently travel between clinics and physician locations.</li>
       </ul>
     </div>
+
     <div class="exp-card reveal">
-      <div class="exp-top">
+      <div class="exp-header">
         <div class="exp-title">HelpDesk &amp; Front-End Developer</div>
         <div class="exp-date">Apr 2018 – Apr 2019</div>
       </div>
       <div class="exp-company">AP Networks <span>· Houston, TX</span></div>
-      <ul class="exp-list">
-        <li>Administered user support for a SaaS platform, handling password resets, account access, and escalating complex issues.</li>
-        <li>Designed and launched a front-end index webpage with anchor links that significantly improved information discovery.</li>
+      <ul class="exp-bullets">
+        <li>Administered user support for a SaaS platform — handling password resets, account access, and navigation questions while documenting and escalating complex issues.</li>
+        <li>Designed and launched a front-end index webpage with anchor links and clean navigation, significantly improving how users located information.</li>
       </ul>
     </div>
+
     <div class="exp-card reveal">
-      <div class="exp-top">
+      <div class="exp-header">
         <div class="exp-title">IT Technician</div>
         <div class="exp-date">May 2014 – Apr 2018</div>
       </div>
       <div class="exp-company">University of Houston Downtown <span>· Houston, TX</span></div>
-      <ul class="exp-list">
-        <li>Resolved software and hardware issues for students and faculty across Windows classroom and lab systems.</li>
-        <li>Imaged, deployed, and maintained campus computers; terminated network cables; troubleshot classroom AV equipment.</li>
+      <ul class="exp-bullets">
+        <li>Resolved software and hardware issues for students and faculty across Windows-based classroom and lab systems.</li>
+        <li>Imaged, deployed, and maintained campus computers; terminated and tested network cables; troubleshot classroom AV equipment for reliable daily operations.</li>
       </ul>
     </div>
+
     <div class="exp-card reveal">
-      <div class="exp-top">
+      <div class="exp-header">
         <div class="exp-title">Store Operations Manager &amp; IT</div>
         <div class="exp-date">Oct 2012 – Apr 2014</div>
       </div>
       <div class="exp-company">Oportun – Progreso Financiero <span>· Menlo Park, CA</span></div>
-      <ul class="exp-list">
-        <li>Managed IT support for 16 Texas locations — maintaining connectivity, printers, and workstations.</li>
-        <li>Deployed 9 new locations across LA and San Francisco, configuring all workstations and networking infrastructure.</li>
+      <ul class="exp-bullets">
+        <li>Managed IT support for 16 Texas locations — maintaining internet connectivity, printers, and workstations through proactive troubleshooting and coordinated resolutions.</li>
+        <li>Successfully deployed 9 new locations across Los Angeles and San Francisco, configuring workstations, networking infrastructure, and equipment so each opened fully operational on day one.</li>
       </ul>
     </div>
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- SKILLS -->
 <section id="skills">
-  <div class="section-tag reveal">Skills</div>
+  <div class="section-eyebrow reveal">Skills</div>
   <h2 class="reveal">Technical Toolkit</h2>
-  <p class="sub reveal">Built across enterprise IT, software development, and systems administration.</p>
+  <p class="section-intro reveal">Built across enterprise IT, software development, and systems administration over a decade.</p>
+
   <div class="skills-grid">
     <div class="skill-card reveal">
       <span class="skill-icon">🌐</span>
@@ -943,7 +986,7 @@
       <h3>IT Support</h3>
       <div class="tag-row">
         <span class="stag hot">Tier 1 &amp; 2 Support</span>
-        <span class="stag">Hardware</span><span class="stag">Network Cabling</span><span class="stag">Imaging</span>
+        <span class="stag">Hardware Troubleshooting</span><span class="stag">Network Cabling</span><span class="stag">Imaging &amp; Deployment</span>
       </div>
     </div>
     <div class="skill-card reveal">
@@ -957,13 +1000,17 @@
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- EDUCATION -->
 <section id="education">
-  <div class="section-tag reveal">Education</div>
+  <div class="section-eyebrow reveal">Education</div>
   <h2 class="reveal">Academic Background</h2>
-  <div class="edu-row reveal">
+  <p class="section-intro reveal">Computer Science foundation from the University of Houston, backed by industry certifications.</p>
+
+  <div class="edu-grid reveal">
     <div class="edu-card">
-      <div class="edu-icon">🎓</div>
+      <div class="edu-icon-wrap">🎓</div>
       <div>
         <h3>Bachelor of Computer Science</h3>
         <div class="edu-school">University of Houston-Downtown</div>
@@ -971,7 +1018,7 @@
       </div>
     </div>
     <div class="edu-card">
-      <div class="edu-icon">🏅</div>
+      <div class="edu-icon-wrap">🏅</div>
       <div>
         <h3>CompTIA A+ Certification</h3>
         <div class="edu-school">CompTIA</div>
@@ -981,15 +1028,20 @@
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- HACKATHON -->
 <section id="highlights">
-  <div class="section-tag reveal">Leadership</div>
+  <div class="section-eyebrow reveal">Leadership</div>
   <h2 class="reveal">Hackathon Spotlight</h2>
+
   <div class="hackathon-card reveal">
     <div class="hackathon-icon">🏆</div>
     <div>
       <h3>Rice Hackathon — Team Lead</h3>
-      <p>Led a team at Rice Hackathon (Major League Hacking) to build <strong>Shelterize.net</strong> — a disaster-response check-in site inspired by Hurricane Harvey, helping people confirm their safety and reconnect with loved ones. Built on Microsoft Azure.</p>
+      <p>
+        Led a team at Rice Hackathon (Major League Hacking) to co-develop <strong>Shelterize.net</strong> — a disaster-response check-in webpage inspired by Hurricane Harvey, designed to help individuals confirm their safety and reconnect with loved ones. Built on Microsoft Azure.
+      </p>
       <div class="badge-row">
         <span class="award-badge">🥇 Best Design Track</span>
         <span class="award-badge">☁️ Best Use of Microsoft Azure</span>
@@ -998,15 +1050,19 @@
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- INTERESTS -->
 <section id="interests">
-  <div class="section-tag reveal">Beyond Tech</div>
+  <div class="section-eyebrow reveal">Beyond Tech</div>
   <h2 class="reveal">Personal Interests</h2>
+  <p class="section-intro reveal">What keeps me creative and curious outside of the keyboard.</p>
+
   <div class="interests-grid">
     <div class="interest-card reveal">
       <span class="interest-emoji">🏙️</span>
       <h3>Architectural Photography</h3>
-      <p>Capturing form, structural detail, and natural lighting in urban environments. Drawn to the geometry of cities.</p>
+      <p>Capturing architectural form, structural detail, and natural lighting in urban environments. Drawn to the geometry hidden in everyday cities.</p>
     </div>
     <div class="interest-card reveal">
       <span class="interest-emoji">✈️</span>
@@ -1016,17 +1072,19 @@
     <div class="interest-card reveal">
       <span class="interest-emoji">🌐</span>
       <h3>IT Infrastructure &amp; Networking</h3>
-      <p>Studying for CompTIA Network+ with a practical focus on networking fundamentals and troubleshooting.</p>
+      <p>Actively studying for CompTIA Network+ with a practical focus on networking fundamentals and real-world troubleshooting.</p>
     </div>
   </div>
 </section>
 
+<hr class="divider" />
+
 <!-- CONTACT -->
 <section id="contact">
   <div class="contact-inner">
-    <div class="section-tag">Contact</div>
+    <div class="section-eyebrow">Contact</div>
     <h2 class="reveal">Let's Connect</h2>
-    <p class="sub reveal">Whether you have a role in mind, a project to talk through, or just want to say hello — I'd love to hear from you.</p>
+    <p class="section-intro reveal">Whether you have a role in mind, a project to talk through, or just want to say hello — I'd love to hear from you.</p>
     <div class="contact-grid reveal">
       <a href="mailto:alfredalbizures@gmail.com" class="contact-item">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
@@ -1049,43 +1107,26 @@
 
 <!-- FOOTER -->
 <footer>
-  <span class="footer-logo">alfred albizures</span>
-  <span>© 2026 · Houston, TX</span>
+  <span class="logo-foot">alfred albizures</span>
+  <span>© 2026 · Houston, TX · Built without frameworks</span>
 </footer>
 
 <script>
-  // Typing animation
-  const words = ['Technical Analyst_', 'Front-End Developer_', 'IT Professional_', 'Problem Solver_'];
-  let wi = 0, ci = 0, deleting = false;
-  const el = document.getElementById('typed');
-
-  function type() {
-    const word = words[wi];
-    if (!deleting) {
-      el.textContent = word.slice(0, ++ci);
-      if (ci === word.length) { deleting = true; setTimeout(type, 1800); return; }
-    } else {
-      el.textContent = word.slice(0, --ci);
-      if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
-    }
-    setTimeout(type, deleting ? 50 : 80);
-  }
-  type();
-
-  // Scroll reveal
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+
   document.querySelectorAll('.reveal').forEach(el => io.observe(el));
 
-  // Active nav
-  const secs = document.querySelectorAll('section[id]');
-  const navAs = document.querySelectorAll('.nav-links a:not(.nav-cv)');
+  const sections = document.querySelectorAll('section[id]');
+  const links = document.querySelectorAll('.nav-links a:not(.nav-cta)');
+
   window.addEventListener('scroll', () => {
     let cur = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
-    navAs.forEach(a => {
-      a.classList.toggle('active', a.getAttribute('href') === '#' + cur);
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 100) cur = s.id; });
+    links.forEach(a => {
+      const active = a.getAttribute('href') === '#' + cur;
+      a.style.color = active ? 'var(--text)' : '';
     });
   }, { passive: true });
 </script>
