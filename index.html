@@ -817,6 +817,80 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.12);
     }
 
+    /* ── LIGHTBOX ── */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open { display: flex; }
+
+    #lightbox img {
+      max-width: 88vw;
+      max-height: 85vh;
+      border-radius: 10px;
+      object-fit: contain;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.6);
+      user-select: none;
+    }
+
+    .lb-close {
+      position: absolute;
+      top: 1.25rem; right: 1.25rem;
+      width: 40px; height: 40px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 1001;
+    }
+
+    .lb-close:hover { background: var(--red); border-color: var(--red); }
+
+    .lb-arrow {
+      position: absolute;
+      top: 50%; transform: translateY(-50%);
+      width: 48px; height: 48px;
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.2);
+      border-radius: 50%;
+      color: #fff;
+      font-size: 1.3rem;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      transition: background 0.2s;
+      z-index: 1001;
+      user-select: none;
+    }
+
+    .lb-arrow:hover { background: var(--red); border-color: var(--red); }
+    .lb-prev { left: 1.25rem; }
+    .lb-next { right: 1.25rem; }
+
+    .lb-arrow.hidden { opacity: 0; pointer-events: none; }
+
+    .lb-counter {
+      position: absolute;
+      bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+      color: rgba(255,255,255,0.6);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+    }
+
+    .photo-slot { cursor: pointer; }
+    .photo-slot img { transition: transform 0.2s, opacity 0.2s; }
+    .photo-slot:hover img { transform: scale(1.04); opacity: 0.92; }
+
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
@@ -971,7 +1045,7 @@
         <li>Served as primary point of contact for all website updates and production deployments, ensuring accurate and timely releases.</li>
         <li>Built a <strong>Mapbox route-mapping tool</strong> to help the sales team efficiently plan travel between clinics and physician locations.</li>
       </ul>
-      <div class="card-photos">
+      <div class="card-photos" data-group="castle">
         <div class="photo-slot"><img src="cstl1.jpg" alt="Castle Biosciences office build-out" /></div>
         <div class="photo-slot"><img src="cstl2.jpg" alt="Castle Biosciences team" /></div>
         <div class="photo-slot"><img src="cstl3.jpg" alt="Castle Biosciences event" /></div>
@@ -990,7 +1064,7 @@
         <li>Escalated complex or unresolved issues to senior staff with detailed notes, reducing resolution time and ensuring no tickets fell through the cracks.</li>
         <li>Designed and launched a front-end index webpage with anchor links and clean navigation — giving users a fast, intuitive way to find information within the platform's documentation.</li>
       </ul>
-      <div class="card-photos">
+      <div class="card-photos" data-group="ap">
         <div class="photo-slot"><img src="AP1.jpg" alt="AP Networks desk setup" /></div>
         <div class="photo-slot"><img src="AP2.jpg" alt="AP Networks workstation" /></div>
         <div class="photo-slot"><img src="AP3.jpg" alt="AP Networks" /></div>
@@ -1010,7 +1084,7 @@
         <li>Troubleshot classroom AV equipment to ensure systems were functional and ready for daily instruction.</li>
         <li>Balanced full-time studies with work — actively participating in hackathons including <strong>CodeRED</strong> sponsored by Major League Hacking and the <strong>Rice Hackathon</strong>, applying classroom and on-the-job skills in competitive, team-based environments.</li>
       </ul>
-      <div class="card-photos">
+      <div class="card-photos" data-group="uh">
         <div class="photo-slot"><img src="UH1.jpg" alt="UH CodeRED MLH Hackathon" /></div>
         <div class="photo-slot"><img src="UH2.jpg" alt="UH Hackathon team" /></div>
         <div class="photo-slot"><img src="UH3.jpg" alt="UH IT lab" /></div>
@@ -1031,7 +1105,7 @@
         <li><strong>Supported 16 active Texas locations</strong> — monitoring and resolving connectivity, workstation, and peripheral issues to keep downtime minimal across the network.</li>
         <li><strong>Sole IT contact</strong> for store staff — providing on-site and remote troubleshooting across all hardware, network, and software systems.</li>
       </ul>
-      <div class="card-photos">
+      <div class="card-photos" data-group="oportun">
         <div class="photo-slot"><img src="opt1.JPG" alt="Oportun workstation setup" /></div>
         <div class="photo-slot"><img src="opt2.JPG" alt="Progreso Financiero store interior" /></div>
         <div class="photo-slot"><img src="opt3.JPG" alt="Network infrastructure cabling" /></div>
@@ -1247,6 +1321,62 @@
 </footer>
 
 <script>
+  // ── LIGHTBOX ──
+  const lb        = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lbImg');
+  const lbClose   = document.getElementById('lbClose');
+  const lbPrev    = document.getElementById('lbPrev');
+  const lbNext    = document.getElementById('lbNext');
+  const lbCounter = document.getElementById('lbCounter');
+
+  let currentGroup = [];
+  let currentIndex = 0;
+
+  function openLightbox(imgs, index) {
+    currentGroup = imgs;
+    currentIndex = index;
+    showSlide();
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showSlide() {
+    lbImg.src = currentGroup[currentIndex].src;
+    lbImg.alt = currentGroup[currentIndex].alt;
+    lbCounter.textContent = (currentIndex + 1) + ' / ' + currentGroup.length;
+    lbPrev.classList.toggle('hidden', currentIndex === 0);
+    lbNext.classList.toggle('hidden', currentIndex === currentGroup.length - 1);
+  }
+
+  // Wire up each photo grid
+  document.querySelectorAll('.card-photos').forEach(grid => {
+    const imgs = Array.from(grid.querySelectorAll('.photo-slot img'));
+    imgs.forEach((img, i) => {
+      img.parentElement.addEventListener('click', () => openLightbox(imgs, i));
+    });
+  });
+
+  lbClose.addEventListener('click', closeLightbox);
+  lbPrev.addEventListener('click', () => { if (currentIndex > 0) { currentIndex--; showSlide(); } });
+  lbNext.addEventListener('click', () => { if (currentIndex < currentGroup.length - 1) { currentIndex++; showSlide(); } });
+
+  // Close on backdrop click
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+  // Keyboard navigation
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && currentIndex > 0) { currentIndex--; showSlide(); }
+    if (e.key === 'ArrowRight' && currentIndex < currentGroup.length - 1) { currentIndex++; showSlide(); }
+  });
+
+  // ── SCROLL REVEAL ──
   const io = new IntersectionObserver((entries) => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
   }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
@@ -1265,6 +1395,15 @@
     });
   }, { passive: true });
 </script>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" id="lbClose">&#x2715;</button>
+  <button class="lb-arrow lb-prev" id="lbPrev">&#8592;</button>
+  <img id="lbImg" src="" alt="" />
+  <button class="lb-arrow lb-next" id="lbNext">&#8594;</button>
+  <div class="lb-counter" id="lbCounter"></div>
+</div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
