@@ -936,6 +936,31 @@
       z-index: 1;
     }
 
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem 1.25rem;
+      margin-top: 0.75rem;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-3);
+    }
+
+    .legend-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      border: 2px solid #fff;
+      box-shadow: 0 0 0 1.5px rgba(0,0,0,0.15);
+      flex-shrink: 0;
+    }
+
     .map-pin-label {
       background: #fff;
       border: 2px solid var(--red, #FF385C);
@@ -1427,7 +1452,7 @@
         <li><strong>Built out full network infrastructure</strong> at every site: deployed routers, managed switches, and configured LAN/WAN — coordinating with ISPs to ensure uptime from opening.</li>
         <li><strong>Deployed and configured all store hardware</strong> — workstations, POS terminals, printers, and IP cameras — handling imaging, drivers, and system setup end-to-end.</li>
         <li><strong>Managed vendors</strong> across hardware, telecom, and security contractors — aligning delivery timelines and verifying all equipment met standards before installation.</li>
-        <li><strong>Supported 16 active Texas locations</strong> — monitoring and resolving connectivity, workstation, and peripheral issues to keep downtime minimal across the network.</li>
+        <li><strong>Supported 18 active locations across Texas and California</strong> — monitoring and resolving connectivity, workstation, and peripheral issues to keep downtime minimal across the network.</li>
         <li><strong>Sole IT contact</strong> for store staff — providing on-site and remote troubleshooting across all hardware, network, and software systems.</li>
       </ul>
       <div class="card-photos">
@@ -1435,8 +1460,16 @@
         <div class="photo-slot"><img src="opt2.webp" loading="lazy" decoding="async" alt="Progreso Financiero store interior" /></div>
         <div class="photo-slot"><img src="opt3.webp" loading="lazy" decoding="async" alt="Network infrastructure cabling" /></div>
       </div>
-      <div class="map-label">16 Managed Locations across Texas</div>
+      <div class="map-label">18 Locations across TX &amp; CA</div>
       <div id="oportun-map"></div>
+      <div class="map-legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#22c55e;"></span>New / Opened</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#3b82f6;"></span>Upgraded</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#f97316;"></span>Maintenance</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#a855f7;"></span>Training</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#94a3b8;"></span>Closed</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#dc2626;"></span>Burned down</span>
+      </div>
     </div>
   </div>
 </section>
@@ -1775,54 +1808,60 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-  const map = L.map('oportun-map', { zoomControl: true, scrollWheelZoom: false })
-    .setView([29.8, -97.5], 6);
+  const map = L.map('oportun-map', { zoomControl: true, scrollWheelZoom: false });
 
   L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
     attribution: '© <a href="https://carto.com/">CARTO</a>',
     maxZoom: 19
   }).addTo(map);
 
-  const redIcon = L.divIcon({
-    className: '',
-    html: `<div style="
-      width:14px;height:14px;
-      background:#FF385C;
-      border:2.5px solid #fff;
-      border-radius:50%;
-      box-shadow:0 0 0 2px #FF385C, 0 2px 6px rgba(0,0,0,0.25);
-    "></div>`,
-    iconSize: [14, 14],
-    iconAnchor: [7, 7]
-  });
+  function makeIcon(color) {
+    return L.divIcon({
+      className: '',
+      html: `<div style="
+        width:13px;height:13px;
+        background:${color};
+        border:2.5px solid #fff;
+        border-radius:50%;
+        box-shadow:0 0 0 2px ${color}, 0 2px 6px rgba(0,0,0,0.22);
+      "></div>`,
+      iconSize: [13, 13],
+      iconAnchor: [6.5, 6.5]
+    });
+  }
 
+  // Types: new=#22c55e  upgraded=#3b82f6  maintenance=#f97316
+  //        training=#a855f7  closed=#94a3b8  burned=#dc2626
   const locations = [
-    // Houston (5 locations)
-    { lat: 29.7604, lng: -95.3698, label: 'Houston – Downtown' },
-    { lat: 29.7200, lng: -95.4100, label: 'Houston – SW' },
-    { lat: 29.7900, lng: -95.3300, label: 'Houston – NE' },
-    { lat: 29.6800, lng: -95.5100, label: 'Houston – Stafford' },
-    { lat: 29.7500, lng: -95.4700, label: 'Houston – Westside' },
-    // Dallas (3 locations)
-    { lat: 32.7767, lng: -96.7970, label: 'Dallas – Downtown' },
-    { lat: 32.8200, lng: -96.8500, label: 'Dallas – North' },
-    { lat: 32.7300, lng: -96.8700, label: 'Dallas – Oak Cliff' },
-    // Fort Worth (2 locations)
-    { lat: 32.7555, lng: -97.3308, label: 'Fort Worth – Downtown' },
-    { lat: 32.7000, lng: -97.3800, label: 'Fort Worth – South' },
-    // San Antonio (3 locations)
-    { lat: 29.4241, lng: -98.4936, label: 'San Antonio – Downtown' },
-    { lat: 29.4600, lng: -98.5400, label: 'San Antonio – NW' },
-    { lat: 29.3800, lng: -98.5200, label: 'San Antonio – South' },
-    // Brownsville (2 locations)
-    { lat: 25.9017, lng: -97.4975, label: 'Brownsville – Main' },
-    { lat: 25.9300, lng: -97.4700, label: 'Brownsville – East' },
-    // Laredo (1 location)
-    { lat: 27.5306, lng: -99.4803, label: 'Laredo' },
+    // ── Houston ──
+    { lat: 29.8143, lng: -95.3874, label: 'New Deployment · 5316 Airline Dr, Houston TX',      color: '#22c55e' },
+    { lat: 29.7776, lng: -95.4679, label: 'New Deployment · 1811 Wirt Rd, Houston TX',         color: '#22c55e' },
+    { lat: 29.8432, lng: -95.3540, label: 'Upgraded · 10401 Jensen Dr (Fiesta Mart), Houston TX', color: '#3b82f6' },
+    { lat: 29.6621, lng: -95.2119, label: 'New Deployment · 1603 Spencer Hwy (Fiesta Mart), South Houston TX', color: '#22c55e' },
+    { lat: 29.7076, lng: -95.4814, label: 'Upgraded · 5716 Bellaire Blvd (Vallarta), Houston TX', color: '#3b82f6' },
+    { lat: 29.7658, lng: -95.2808, label: 'Maintenance · 10915 East Freeway, Houston TX',      color: '#f97316' },
+    // ── Dallas ──
+    { lat: 32.9380, lng: -96.7680, label: 'Upgraded · 14211 S Coit Rd, Dallas TX',             color: '#3b82f6' },
+    { lat: 32.7170, lng: -96.6850, label: 'First Store / New · 10325 Lake June Rd, Dallas TX', color: '#22c55e' },
+    { lat: 32.7434, lng: -96.8568, label: 'Maintenance · 2515 W Jefferson Blvd (El Rio Grande), Dallas TX', color: '#f97316' },
+    { lat: 32.8627, lng: -96.8782, label: 'New Deployment · 9751 Webb Chapel Rd, Dallas TX',   color: '#22c55e' },
+    // ── Garland ──
+    { lat: 32.9126, lng: -96.6893, label: 'Maintenance · 3460 W Walnut St (El Rancho), Garland TX', color: '#f97316' },
+    // ── Fort Worth ──
+    { lat: 32.7039, lng: -97.3308, label: 'Maintenance · 4200 S Freeway (La Gran Plaza), Fort Worth TX', color: '#f97316' },
+    { lat: 32.7740, lng: -97.3311, label: 'Maintenance · 241 NE 28th St, Fort Worth TX',       color: '#f97316' },
+    // ── San Antonio ──
+    { lat: 29.3729, lng: -98.4936, label: 'Closed · 238 SW Military Dr, San Antonio TX',       color: '#94a3b8' },
+    // ── Brownsville ──
+    { lat: 25.9017, lng: -97.4975, label: 'Burned Down · Brownsville TX',                      color: '#dc2626' },
+    // ── California ──
+    { lat: 37.4852, lng: -122.2011, label: 'Training HQ · 1744 El Camino Real, Redwood City CA', color: '#a855f7' },
+    { lat: 34.0634, lng: -117.6358, label: 'Opened · 1355 E 4th St, Ontario CA',               color: '#22c55e' },
+    { lat: 33.9803, lng: -118.2757, label: 'Training · 7225 S Figueroa St, Los Angeles CA',    color: '#a855f7' },
   ];
 
   locations.forEach(loc => {
-    L.marker([loc.lat, loc.lng], { icon: redIcon })
+    L.marker([loc.lat, loc.lng], { icon: makeIcon(loc.color) })
       .addTo(map)
       .bindTooltip(`<div class="map-pin-label">${loc.label}</div>`, {
         permanent: false,
@@ -1831,6 +1870,10 @@
         opacity: 1
       });
   });
+
+  // Auto-fit map to show all markers (TX + CA)
+  const allCoords = locations.map(l => [l.lat, l.lng]);
+  map.fitBounds(allCoords, { padding: [24, 24] });
 </script>
 
 <!-- ── HERO LINES CANVAS ── -->
