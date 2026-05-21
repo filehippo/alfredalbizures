@@ -1000,6 +1000,134 @@
     }
     .photo-caption strong { color: var(--text-2); font-style: normal; }
 
+    /* ── PROJECTS ── */
+    #projects { background: var(--bg); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .project-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow 0.25s, transform 0.25s;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .project-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-3px);
+    }
+
+    .project-preview {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding: 1.25rem 1.25rem 1rem;
+      min-height: 130px;
+      text-decoration: none;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-preview-url {
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      letter-spacing: 0.04em;
+      font-family: 'Courier New', monospace;
+    }
+
+    .project-preview-icon {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.18);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+
+    .project-preview:hover .project-preview-icon {
+      background: rgba(255,255,255,0.32);
+    }
+
+    /* Subtle grid pattern overlay on preview */
+    .project-preview::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255,255,255,0.04) 0px,
+        rgba(255,255,255,0.04) 1px,
+        transparent 1px,
+        transparent 28px
+      );
+      pointer-events: none;
+    }
+
+    .project-body {
+      padding: 1.4rem 1.5rem 1.6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      flex: 1;
+    }
+
+    .project-type {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--red);
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .project-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.25;
+    }
+
+    .project-desc {
+      font-size: 0.875rem;
+      color: var(--text-2);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.4rem;
+    }
+
+    .project-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      margin-top: 0.75rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--red);
+      text-decoration: none;
+      transition: gap 0.2s;
+    }
+
+    .project-link:hover { gap: 0.65rem; }
+
     /* ── SCROLL REVEAL ── */
     .reveal {
       opacity: 0;
@@ -1034,6 +1162,9 @@
       /* Nav */
       .nav-links { display: none; }
       nav { padding: 0 1.25rem; }
+
+      /* Projects */
+      .projects-grid { grid-template-columns: 1fr; margin-top: 2rem; }
 
       /* Hero */
       #hero { padding: calc(var(--nav-h) + 2rem) 1.25rem 3rem; }
@@ -1085,6 +1216,7 @@
     <li><a href="#about">About</a></li>
     <li><a href="#experience">Experience</a></li>
     <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
     <li><a href="#education">Education</a></li>
     <li><a href="https://github.com/filehippo" target="_blank" rel="noopener">GitHub</a></li>
     <li><a href="#contact" class="nav-cta">Contact</a></li>
@@ -1336,6 +1468,47 @@
         <span class="stag">Network+ (expected Q3 2026)</span>
       </div>
     </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-eyebrow reveal">Projects</div>
+  <h2 class="reveal">Built &amp; Shipped</h2>
+  <p class="section-intro reveal">Client websites and personal projects — real deliverables, live on the web.</p>
+
+  <div class="projects-grid">
+
+    <!-- Garcia's Custom Furniture -->
+    <div class="project-card reveal">
+      <a href="https://garciascustomfurniture.com/" target="_blank" rel="noopener" class="project-preview"
+         style="background: linear-gradient(135deg, #5C3D1E 0%, #A0652A 60%, #C4902A 100%);">
+        <span class="project-preview-url">garciascustomfurniture.com</span>
+        <span class="project-preview-icon">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+          </svg>
+        </span>
+      </a>
+      <div class="project-body">
+        <div class="project-type">Client Work · Houston Heights, TX</div>
+        <h3 class="project-title">Garcia's Custom Furniture</h3>
+        <p class="project-desc">Designed and developed a full business website for a father-and-son custom woodworking shop in Houston Heights, TX. Built from scratch — featuring a portfolio gallery with 200+ completed projects, service pages for homeowners, businesses, and interior designers, a quote request form, and integrations with Instagram, Pinterest, Houzz, and Yelp. Serves as the shop's primary digital storefront and lead-generation tool.</p>
+        <div class="project-tags">
+          <span class="stag hot">HTML</span><span class="stag hot">CSS</span><span class="stag hot">JavaScript</span>
+          <span class="stag">Responsive Design</span><span class="stag">Client Delivery</span>
+        </div>
+        <a href="https://garciascustomfurniture.com/" target="_blank" rel="noopener" class="project-link">
+          Visit live site
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+
   </div>
 </section>
 
