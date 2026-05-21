@@ -52,7 +52,7 @@
     "knowsAbout": [
       "IT Infrastructure", "Helpdesk Support", "Network Deployment",
       "Front-End Development", "Windows Administration", "CompTIA A+",
-      "Technical Analysis", "HTML", "CSS", "JavaScript", "Mapbox",
+      "Technical Analysis", "HTML", "CSS", "JavaScript",
       "IP Camera Installation", "Cable Termination", "Device Imaging"
     ],
     "hasCredential": {
@@ -247,6 +247,37 @@
     @keyframes blink {
       0%, 100% { opacity: 1; }
       50% { opacity: 0.3; }
+    }
+
+    /* Open to opportunities badge */
+    .open-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: #f0fdf4;
+      color: #16a34a;
+      border: 1.5px solid #bbf7d0;
+      padding: 0.4rem 1rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      margin-bottom: 1.25rem;
+      letter-spacing: 0.03em;
+    }
+
+    .open-dot {
+      width: 8px; height: 8px;
+      background: #22c55e;
+      border-radius: 50%;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 0 rgba(34,197,94,0.5);
+      animation: pulse-green 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-green {
+      0%   { box-shadow: 0 0 0 0 rgba(34,197,94,0.55); }
+      70%  { box-shadow: 0 0 0 7px rgba(34,197,94,0); }
+      100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
     }
 
     h1 {
@@ -1074,6 +1105,10 @@
 
     <!-- LEFT: text -->
     <div class="hero-left">
+      <div class="open-badge">
+        <span class="open-dot"></span>
+        Open to new opportunities
+      </div>
       <h1>
         Technical Analyst<br>&amp; <em>Developer</em>
       </h1>
@@ -1135,16 +1170,16 @@
         I'm a <strong>Technical Analyst and Developer</strong> with a decade of experience across healthcare tech, fintech, and higher education. I thrive at the intersection of IT infrastructure and software — scripting deployment tools, building front-end interfaces, and leading device migrations.
       </p>
       <p class="reveal">
-        At <strong>Castle Biosciences</strong>, I was the primary point of contact for website deployments and built a <strong>Mapbox route-mapping tool</strong> that streamlined sales operations across hundreds of clinic locations. I also led a Windows 11 migration across 300+ devices.
+        At <strong>Castle Biosciences</strong>, I was the primary point of contact for all website deployments and led a <strong>Windows 11 migration across 300+ devices</strong> — coordinating cross-team execution while supporting a company that grew from startup to publicly traded.
       </p>
       <p class="reveal">
-        Outside of tech, I see the world through a camera — focused on <strong>architectural photography</strong> and documenting human culture through travel. Currently pursuing my <strong>CompTIA Network+</strong> certification.
+        Outside of tech, I see the world through a camera — focused on <strong>architectural photography</strong> and documenting human culture through travel. Currently studying for <strong>CompTIA Network+</strong> (expected Q3 2026).
       </p>
       <div class="pill-row reveal">
         <span class="pill">Houston, TX</span>
         <span class="pill">Spanish Fluent</span>
         <span class="pill">CompTIA A+</span>
-        <span class="pill">Open to Roles</span>
+        <span class="pill">Network+ (Q3 2026)</span>
       </div>
     </div>
   </div>
@@ -1171,7 +1206,7 @@
         <li>Resolved Tier 1 &amp; Tier 2 helpdesk tickets remotely and on-site — covering hardware, software, and network issues — while managing new-hire onboarding across a rapidly growing headcount.</li>
         <li>Spearheaded a <strong>Windows 11 migration and device refresh</strong> across 300+ machines, coordinating cross-team execution with minimal disruption to end users.</li>
         <li>Served as primary point of contact for all website updates and production deployments, ensuring accurate and timely releases.</li>
-        <li>Built a <strong>Mapbox route-mapping tool</strong> to help the sales team efficiently plan travel between clinics and physician locations.</li>
+        <li>Built an internal <strong>route-mapping tool</strong> to help the sales team efficiently plan travel between clinics and physician locations, reducing coordination time across a growing provider network.</li>
       </ul>
       <div class="card-photos">
         <div class="photo-slot"><img src="cstl1.webp" loading="lazy" decoding="async" alt="Castle Biosciences office build-out" /></div>
@@ -1253,52 +1288,59 @@
   <p class="section-intro reveal">Built across enterprise IT, software development, and systems administration over a decade.</p>
 
   <div class="skills-grid">
+    <!-- 1 — Most evidenced: IT Support across all 4 roles -->
+    <div class="skill-card reveal">
+      <span class="skill-icon">🔧</span>
+      <h3>IT Support &amp; Helpdesk</h3>
+      <div class="tag-row">
+        <span class="stag hot">Tier 1 &amp; 2 Support</span><span class="stag hot">Hardware Troubleshooting</span>
+        <span class="stag hot">Imaging &amp; Deployment</span><span class="stag">AV Equipment</span><span class="stag">Onboarding</span>
+      </div>
+    </div>
+    <!-- 2 — Network/Infra: Oportun store buildouts, UHD cabling, Castle Ubiquiti/Cradlepoint -->
+    <div class="skill-card reveal">
+      <span class="skill-icon">🖧</span>
+      <h3>Network &amp; Infrastructure</h3>
+      <div class="tag-row">
+        <span class="stag hot">LAN / WAN</span><span class="stag hot">Active Directory</span>
+        <span class="stag hot">Ubiquiti</span><span class="stag">Cradlepoint</span>
+        <span class="stag">Network Cabling</span><span class="stag">IP Cameras</span>
+      </div>
+    </div>
+    <!-- 3 — Front-End: AP Networks webpage, Castle site deployments, Shelterize hackathon win -->
     <div class="skill-card reveal">
       <span class="skill-icon">🌐</span>
       <h3>Front-End Development</h3>
       <div class="tag-row">
         <span class="stag hot">HTML</span><span class="stag hot">CSS</span><span class="stag hot">JavaScript</span>
-        <span class="stag">WordPress</span><span class="stag">WP Engine</span><span class="stag">Mapbox</span>
+        <span class="stag">WordPress</span><span class="stag">WP Engine</span><span class="stag">Azure</span>
       </div>
     </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">🗄️</span>
-      <h3>Data &amp; Backend</h3>
-      <div class="tag-row">
-        <span class="stag hot">SQL</span><span class="stag hot">MySQL</span><span class="stag">C#</span>
-        <span class="stag">.NET</span><span class="stag">Domo</span><span class="stag">CastorEDC</span>
-      </div>
-    </div>
-    <div class="skill-card reveal">
-      <span class="skill-icon">☁️</span>
-      <h3>Cloud &amp; Infrastructure</h3>
-      <div class="tag-row">
-        <span class="stag hot">AWS</span><span class="stag hot">Active Directory</span>
-        <span class="stag">Ubiquiti</span><span class="stag">Cradlepoint</span><span class="stag">Power Automate</span>
-      </div>
-    </div>
+    <!-- 4 — Tools used daily at Castle over 7 years -->
     <div class="skill-card reveal">
       <span class="skill-icon">🛠️</span>
       <h3>Tools &amp; Platforms</h3>
       <div class="tag-row">
-        <span class="stag hot">Git</span><span class="stag hot">Jira</span>
-        <span class="stag">Confluence</span><span class="stag">Windows</span><span class="stag">ClinCapture</span>
+        <span class="stag hot">Git</span><span class="stag hot">Jira</span><span class="stag hot">Windows</span>
+        <span class="stag">Confluence</span><span class="stag">Power Automate</span><span class="stag">ClinCapture</span>
       </div>
     </div>
+    <!-- 5 — Data/Backend from Castle Programmer Analyst role -->
     <div class="skill-card reveal">
-      <span class="skill-icon">🔧</span>
-      <h3>IT Support</h3>
+      <span class="skill-icon">🗄️</span>
+      <h3>Data &amp; Backend</h3>
       <div class="tag-row">
-        <span class="stag hot">Tier 1 &amp; 2 Support</span>
-        <span class="stag">Hardware Troubleshooting</span><span class="stag">Network Cabling</span><span class="stag">Imaging &amp; Deployment</span>
+        <span class="stag hot">SQL</span><span class="stag hot">MySQL</span><span class="stag">AWS</span>
+        <span class="stag">C#</span><span class="stag">Domo</span><span class="stag">CastorEDC</span>
       </div>
     </div>
+    <!-- 6 — Certs & languages -->
     <div class="skill-card reveal">
       <span class="skill-icon">💬</span>
-      <h3>Languages &amp; Certs</h3>
+      <h3>Certifications &amp; Languages</h3>
       <div class="tag-row">
-        <span class="stag hot">Spanish – Fluent</span>
-        <span class="stag hot">CompTIA A+</span><span class="stag">Network+ (In Progress)</span>
+        <span class="stag hot">CompTIA A+</span><span class="stag hot">Spanish – Fluent</span>
+        <span class="stag">Network+ (expected Q3 2026)</span>
       </div>
     </div>
   </div>
@@ -1404,7 +1446,7 @@
     <div class="interest-card reveal">
       <span class="interest-emoji">🌐</span>
       <h3>IT Infrastructure &amp; Networking</h3>
-      <p>Actively studying for CompTIA Network+ with a practical focus on networking fundamentals and real-world troubleshooting.</p>
+      <p>Currently studying for CompTIA Network+ (expected Q3 2026) — focused on networking fundamentals, subnetting, and real-world troubleshooting.</p>
     </div>
   </div>
 </section>
