@@ -283,9 +283,37 @@
       font-size: clamp(1rem, 1.8vw, 1.15rem);
       color: var(--text-3);
       max-width: 520px;
-      margin-bottom: 2.5rem;
+      margin-bottom: 1.25rem;
       line-height: 1.75;
       font-weight: 400;
+    }
+
+    .hero-target {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-2);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-target-roles {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
+    }
+
+    .hero-target-role {
+      background: var(--red-bg);
+      color: var(--red);
+      border: 1px solid rgba(255,56,92,0.2);
+      padding: 0.18rem 0.65rem;
+      border-radius: 99px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .hero-actions {
@@ -1239,6 +1267,15 @@
       <p class="hero-sub">
         10+ years bridging IT infrastructure and software development. I build reliable systems, ship clean interfaces, and lead technical teams — based in Houston, TX.
       </p>
+      <div class="hero-target">
+        <span>Seeking</span>
+        <div class="hero-target-roles">
+          <span class="hero-target-role">IT Manager</span>
+          <span class="hero-target-role">Systems Analyst</span>
+          <span class="hero-target-role">Technical Lead</span>
+        </div>
+        <span>roles in Houston, TX</span>
+      </div>
       <div class="hero-actions">
         <a href="#experience" class="btn btn-primary">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3H8a1 1 0 00-1 1v3h10V4a1 1 0 00-1-1z"/></svg>
