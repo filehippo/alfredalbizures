@@ -1871,9 +1871,8 @@
       });
   });
 
-  // Auto-fit map to show all markers (TX + CA)
-  const allCoords = locations.map(l => [l.lat, l.lng]);
-  map.fitBounds(allCoords, { padding: [24, 24] });
+  // Center on Texas where the bulk of locations are; CA pins visible on pan
+  map.setView([29.8, -96.8], 6);
 </script>
 
 <!-- ── HERO LINES CANVAS ── -->
