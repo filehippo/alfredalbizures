@@ -991,6 +991,14 @@
     .photo-slot { cursor: pointer; }
     .photo-slot img { transition: transform 0.25s, filter 0.25s; }
     .photo-slot:hover img { transform: scale(1.04); filter: brightness(0.92); }
+    .photo-caption {
+      font-size: 0.78rem;
+      color: var(--text-3);
+      margin-top: 0.6rem;
+      font-style: italic;
+      line-height: 1.5;
+    }
+    .photo-caption strong { color: var(--text-2); font-style: normal; }
 
     /* ── SCROLL REVEAL ── */
     .reveal {
@@ -1194,9 +1202,10 @@
       </ul>
       <div class="card-photos">
         <div class="photo-slot"><img src="cstl1.webp" loading="lazy" decoding="async" alt="Castle Biosciences office build-out" /></div>
-        <div class="photo-slot"><img src="cstl2.webp" loading="lazy" decoding="async" alt="Castle Biosciences team" /></div>
-        <div class="photo-slot"><img src="cstl3.webp" loading="lazy" decoding="async" alt="Castle Biosciences event" /></div>
+        <div class="photo-slot"><img src="cstl3.webp" loading="lazy" decoding="async" alt="With Derek Maetzold, CEO of Castle Biosciences" /></div>
+        <div class="photo-slot"><img src="cstl2.webp" loading="lazy" decoding="async" alt="Castle Biosciences team event" /></div>
       </div>
+      <p class="photo-caption">📍 Center: with <strong>Derek Maetzold</strong>, CEO of Castle Biosciences, at a company event in Friendswood, TX</p>
     </div>
 
     <div class="exp-card reveal">
