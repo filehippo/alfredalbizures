@@ -115,13 +115,23 @@
       overflow: hidden;
     }
 
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+    }
+
     #hero::before {
       content: '';
       position: absolute;
       top: -200px; right: -200px;
       width: 700px; height: 700px;
-      background: radial-gradient(circle, rgba(255,56,92,0.05) 0%, transparent 65%);
+      background: radial-gradient(circle, rgba(255,56,92,0.06) 0%, transparent 65%);
       pointer-events: none;
+      z-index: 1;
     }
 
     .hero-inner {
@@ -130,6 +140,8 @@
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
       align-items: center;
+      position: relative;
+      z-index: 2;
     }
 
     /* LEFT */
@@ -939,6 +951,7 @@
 
 <!-- HERO -->
 <section id="hero">
+  <canvas id="hero-canvas" aria-hidden="true"></canvas>
   <div class="hero-inner">
 
     <!-- LEFT: text -->
@@ -1395,6 +1408,77 @@
         opacity: 1
       });
   });
+</script>
+
+<!-- ── HERO LINES CANVAS ── -->
+<script>
+(function () {
+  var canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  var ctx = canvas.getContext('2d');
+  var offset = 0;
+  var rafId  = null;
+
+  function resize() {
+    var hero = canvas.parentElement;
+    canvas.width  = hero.offsetWidth;
+    canvas.height = hero.offsetHeight;
+  }
+
+  function draw() {
+    var w = canvas.width, h = canvas.height;
+    ctx.clearRect(0, 0, w, h);
+
+    var gap   = 52;   // spacing between parallel lines
+    var speed = 0.35; // drift speed (px per frame)
+    var count = Math.ceil((w + h) / gap) + 2;
+
+    // Primary lines — very subtle brand tint
+    ctx.beginPath();
+    ctx.lineWidth  = 1;
+    ctx.strokeStyle = 'rgba(255, 56, 92, 0.06)';
+    var shift = offset % gap;
+    for (var i = -1; i <= count; i++) {
+      var x = i * gap + shift;
+      // 45° diagonal: top-right to bottom-left direction
+      ctx.moveTo(x,     0);
+      ctx.lineTo(x - h, h);
+    }
+    ctx.stroke();
+
+    // Every 4th line slightly bolder for a subtle grid feel
+    ctx.beginPath();
+    ctx.lineWidth  = 1;
+    ctx.strokeStyle = 'rgba(255, 56, 92, 0.11)';
+    var bigGap   = gap * 4;
+    var bigShift = offset % bigGap;
+    var bigCount = Math.ceil((w + h) / bigGap) + 2;
+    for (var j = -1; j <= bigCount; j++) {
+      var bx = j * bigGap + bigShift;
+      ctx.moveTo(bx,     0);
+      ctx.lineTo(bx - h, h);
+    }
+    ctx.stroke();
+
+    offset += speed;
+    rafId = requestAnimationFrame(draw);
+  }
+
+  // Pause when hero is off-screen (saves CPU)
+  var io = new IntersectionObserver(function (entries) {
+    if (entries[0].isIntersecting) {
+      if (!rafId) draw();
+    } else {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+    }
+  });
+  io.observe(canvas.parentElement);
+
+  resize();
+  window.addEventListener('resize', resize, { passive: true });
+  draw();
+}());
 </script>
 
 <!-- ── LIGHTBOX ── -->
