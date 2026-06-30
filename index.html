@@ -1053,6 +1053,22 @@
     }
     .photo-caption strong { color: var(--text-2); font-style: normal; }
 
+    .project-videos {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5rem;
+      margin: 1rem 0 0.25rem;
+    }
+
+    .project-videos video {
+      width: 100%;
+      aspect-ratio: 9/16;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px dashed var(--border);
+      background: #000;
+    }
+
     /* ── PROJECTS ── */
     #projects { background: var(--bg); }
 
@@ -1611,19 +1627,41 @@
         </div>
       </a>
       <div class="project-body">
-        <div class="project-type">Co-Founder &amp; Developer · Katy &amp; Crosby, TX</div>
+        <div class="project-type">Owner &amp; Developer · Katy &amp; Crosby, TX</div>
         <h3 class="project-title">That's Done Right</h3>
-        <p class="project-desc">A full-stack lawn and outdoor service booking platform — live and actively serving customers in Katy and Crosby, TX. Customers browse, book, and pay for lawn care services entirely online. Architected the Supabase backend including database schema, row-level security, and serverless Edge Functions for business logic. Integrated Stripe for payments and subscriptions, Resend for transactional emails, and built the front-end booking experience end to end.</p>
+        <p class="project-desc">A full-stack lawn and outdoor service booking platform — live with <strong>10 recurring clients</strong> across Katy and Crosby, TX. Customers browse, book, and pay for lawn care services entirely online. Architected the Supabase backend including database schema, row-level security, and serverless Edge Functions for business logic. Integrated Stripe for payments and subscriptions, Resend for transactional emails, and built the front-end booking experience end to end.</p>
+        <div class="card-photos">
+          <div class="photo-slot"><img src="done1.webp" loading="lazy" decoding="async" alt="That's Done Right branded crew jacket" /></div>
+          <div class="photo-slot"><img src="done2.webp" loading="lazy" decoding="async" alt="That's Done Right crew on-site" /></div>
+        </div>
+        <p class="photo-caption">📍 Branded crew jackets and on-site service — the team behind the platform</p>
+        <div class="project-videos">
+          <video controls preload="none" playsinline poster="done3-poster.webp">
+            <source src="done3.mp4" type="video/mp4">
+          </video>
+          <video controls preload="none" playsinline poster="done4-poster.webp">
+            <source src="done4.mp4" type="video/mp4">
+          </video>
+        </div>
+        <p class="photo-caption">🎥 Hard evidence — the crew out cutting lawns</p>
         <div class="project-tags">
           <span class="stag hot">Supabase</span><span class="stag hot">Stripe</span><span class="stag hot">Edge Functions</span>
           <span class="stag">Resend</span><span class="stag">PostgreSQL</span><span class="stag">JavaScript</span>
         </div>
-        <a href="https://thatsdoneright.com/" target="_blank" rel="noopener" class="project-link">
-          Visit site
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
-          </svg>
-        </a>
+        <div style="display:flex;flex-wrap:wrap;gap:1.25rem;">
+          <a href="https://thatsdoneright.com/" target="_blank" rel="noopener" class="project-link">
+            Visit site
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+          <a href="https://www.instagram.com/thats.doneright" target="_blank" rel="noopener" class="project-link">
+            @thats.doneright
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
 
