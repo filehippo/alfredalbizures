@@ -1053,20 +1053,11 @@
     }
     .photo-caption strong { color: var(--text-2); font-style: normal; }
 
-    .project-videos {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 0.5rem;
-      margin: 1rem 0 0.25rem;
-      max-width: 70%;
-    }
-
-    .project-videos video {
+    .card-photos .photo-slot video {
       width: 100%;
-      aspect-ratio: 4/3;
+      height: 100%;
       object-fit: cover;
-      border-radius: 8px;
-      border: 2px dashed var(--border);
+      display: block;
       background: #000;
     }
 
@@ -1235,7 +1226,6 @@
 
       /* Projects */
       .projects-grid { grid-template-columns: 1fr; margin-top: 2rem; }
-      .project-videos { max-width: 100%; }
 
       /* Hero */
       #hero { padding: calc(var(--nav-h) + 2rem) 1.25rem 3rem; }
@@ -1413,17 +1403,13 @@
       <div class="card-photos">
         <div class="photo-slot"><img src="done1.webp" loading="lazy" decoding="async" alt="That's Done Right branded crew jacket" /></div>
         <div class="photo-slot"><img src="done2.webp" loading="lazy" decoding="async" alt="That's Done Right crew on-site" /></div>
+        <div class="photo-slot">
+          <video controls preload="none" playsinline poster="done4-poster.webp">
+            <source src="done4.mp4" type="video/mp4">
+          </video>
+        </div>
       </div>
-      <p class="photo-caption">📍 Branded crew jackets and on-site service — the team behind the platform</p>
-      <div class="project-videos">
-        <video controls preload="none" playsinline poster="done3-poster.webp">
-          <source src="done3.mp4" type="video/mp4">
-        </video>
-        <video controls preload="none" playsinline poster="done4-poster.webp">
-          <source src="done4.mp4" type="video/mp4">
-        </video>
-      </div>
-      <p class="photo-caption">🎥 Hard evidence — the crew out cutting lawns</p>
+      <p class="photo-caption">📍 Branded crew jackets, on-site service, and 🎥 the crew out cutting lawns — hard evidence</p>
       <div style="display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:0.5rem;">
         <a href="https://thatsdoneright.com/" target="_blank" rel="noopener" class="project-link">
           Visit site
