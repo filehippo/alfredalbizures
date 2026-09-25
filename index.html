@@ -865,6 +865,11 @@
       z-index: 1;
     }
 
+    /* Soften the basemap to match the light theme — tiles only, so pins stay vivid */
+    #oportun-map .leaflet-tile-pane {
+      filter: grayscale(0.92) brightness(1.07) contrast(0.88);
+    }
+
     .map-legend {
       display: flex;
       flex-wrap: wrap;
@@ -1875,8 +1880,8 @@
   function initMap() {
   const map = L.map('oportun-map', { zoomControl: true, scrollWheelZoom: false });
 
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '© <a href="https://carto.com/">CARTO</a>',
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
     maxZoom: 19
   }).addTo(map);
 
